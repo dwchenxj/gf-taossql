@@ -1,4 +1,4 @@
-package taossql
+package taosql
 
 import (
 	"context"
@@ -11,6 +11,7 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/text/gregex"
 	"github.com/gogf/gf/v2/text/gstr"
+	_ "github.com/taosdata/driver-go/v2/taosSql"
 )
 
 // Driver is the driver for taossql database.
@@ -24,7 +25,7 @@ var (
 )
 
 func init() {
-	if err := gdb.Register(`taossql`, New()); err != nil {
+	if err := gdb.Register(`taosSql`, New()); err != nil {
 		panic(err)
 	}
 }
@@ -46,7 +47,7 @@ func (d *Driver) New(core *gdb.Core, node *gdb.ConfigNode) (gdb.DB, error) {
 func (d *Driver) Open(config *gdb.ConfigNode) (db *sql.DB, err error) {
 	var (
 		source               string
-		underlyingDriverName = "taossql"
+		underlyingDriverName = "taosSql"
 	)
 	if config.Link != "" {
 		source = config.Link
@@ -59,6 +60,7 @@ func (d *Driver) Open(config *gdb.ConfigNode) (db *sql.DB, err error) {
 			source = fmt.Sprintf("%s timezone=%s", source, config.Timezone)
 		}
 	}
+
 	if db, err = sql.Open(underlyingDriverName, source); err != nil {
 		err = gerror.WrapCodef(
 			gcode.CodeDbOperationError, err,

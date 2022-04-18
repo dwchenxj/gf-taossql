@@ -1,8 +1,11 @@
-module github.com/taosql
+module github.com/dwchenxj/taosql
 
 go 1.18
 
-require github.com/gogf/gf/v2 v2.0.0-rc
+require (
+	github.com/gogf/gf/v2 v2.0.0-rc
+	github.com/taosdata/driver-go/v2 v2.0.1
+)
 
 require (
 	github.com/BurntSushi/toml v0.4.1 // indirect
@@ -24,4 +27,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
 
-replace github.com/gogf/gf/v2 => D:/software/github.com/gf/
+replace (
+	github.com/gogf/gf/v2 => D:/software/iems.go/src/github.com/gogf/gf/
+	github.com/taosdata/driver-go/v2 => D:/software/iems.go/src/github.com/taosdata/driver-go
+)
